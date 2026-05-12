@@ -75,45 +75,57 @@ footer { text-align: center; padding: 24px; color: var(--muted); font-size: 12px
       <div class="detail">404 organických KW (DE), 43 v top 1-3</div>
     </div>
     <div class="kpi">
-      <div class="label">SoS vs. DIY giants</div>
-      <div class="value">0,01 %</div>
-      <div class="detail">OBI/Bauhaus/Toom/Hornbach dominují kategorií</div>
+      <div class="label">SoS vs. Tier 1 specialty</div>
+      <div class="value">0,12 %</div>
+      <div class="detail">Erfurt, Storch, Brillux, Caparol, Boesner — etablovaní DE specialty</div>
     </div>
     <div class="kpi">
-      <div class="label">SoS vs. paint specialty</div>
-      <div class="value">0,38 %</div>
-      <div class="detail">Brillux, Caparol, Boesner, Modulor — relevantní peer group</div>
+      <div class="label">SoS vs. Tier 2 niche</div>
+      <div class="value">9,6 %</div>
+      <div class="detail">KIP, Probau, Nespoli, Friess — přímí niche konkurenti</div>
     </div>
   </div>
 </section>
 
 <section>
-  <h2>🏪 DIY giants (mainstream hobby markets)</h2>
+  <h2>🎨 Tier 1 — Etablované DE painter/paint specialty</h2>
   <div class="note">
-    <b>Pozn.:</b> Tyto brandy jsou mainstream DIY řetězce s kompletním sortimentem (zahrada, stavebniny, elektro…).
-    Pro Prema (specializace na malířské potřeby) jsou to spíš <b>category leaders</b>, ne přímí konkurenti.
-    SoS srovnání má smysl ve specialty skupině níže.
+    <b>Peer group #1:</b> Známé DE značky s brand search 1k+ /měs. Erfurt (tapety+malování), Storch (profi werkzeug), Brillux/Caparol (profi barvy), Boesner/Modulor (umělecké potřeby), Alpina (DIY paint), Pufas, Baufix.
   </div>
-  <div id="giants_chart" style="height: 320px;"></div>
+  <div id="tier1_chart" style="height: 320px;"></div>
   <table>
     <thead><tr><th>#</th><th>Brand</th><th>Doména</th><th>Search /měs</th><th>CPC (EUR)</th><th>Kategorie</th></tr></thead>
+    <tbody id="tier1_table"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>🔧 Tier 2 — Niche / přímí konkurenti</h2>
+  <div class="note">
+    <b>Peer group #2:</b> Niche brandy se search 10-500 /měs. Prema (220) se zde realisticky pohybuje. KIP Klebeband (krepové pásky — Prema má v top sellers!), Nespoli (italské štětce), Colorus, Friess Maler.
+  </div>
+  <div id="tier2_chart" style="height: 320px;"></div>
+  <table>
+    <thead><tr><th>#</th><th>Brand</th><th>Doména</th><th>Search /měs</th><th>CPC (EUR)</th><th>Kategorie</th></tr></thead>
+    <tbody id="tier2_table"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>📈 Share of Search — Tier 2 (přímí konkurenti)</h2>
+  <div id="sos_chart" style="height: 360px;"></div>
+  <p class="muted">Brand search Prema (220) jako % součtu Tier 2 niche group. Realistický benchmark — proti Tier 1 nebo DIY giants (OBI 983k, Bauhaus 859k) má smysl měřit jen produktovou hloubku, ne brand share.</p>
+</section>
+
+<section>
+  <h2>🏪 DIY giants — pouze pro kontext</h2>
+  <div class="note" style="background: #ffebee; border-left-color: #c62828;">
+    Mainstream hobby markets jako benchmark "kategorie celkem". <b>Nejsou přímí konkurenti</b> — mají kompletní sortiment (zahrada, stavebniny, elektro). Pro Prema bere se sem jen kontextově.
+  </div>
+  <table>
+    <thead><tr><th>#</th><th>Brand</th><th>Doména</th><th>Search /měs</th><th>CPC (EUR)</th></tr></thead>
     <tbody id="giants_table"></tbody>
   </table>
-</section>
-
-<section>
-  <h2>🎨 Paint & Art Specialty (relevantní peer group)</h2>
-  <div id="specialty_chart" style="height: 320px;"></div>
-  <table>
-    <thead><tr><th>#</th><th>Brand</th><th>Doména</th><th>Search /měs</th><th>CPC (EUR)</th><th>Kategorie</th></tr></thead>
-    <tbody id="specialty_table"></tbody>
-  </table>
-</section>
-
-<section>
-  <h2>📈 Share of Search — paint specialty pouze</h2>
-  <div id="sos_chart" style="height: 360px;"></div>
-  <p class="muted">Brand search Prema (220) jako % součtu peer group. Cíl: růst brandového vyhledávání přes content/PR/PPC investice.</p>
 </section>
 
 <section>
@@ -140,49 +152,68 @@ const SNAPSHOT_DATE = new Date().toLocaleDateString("cs-CZ", { year: "numeric", 
 document.getElementById("snapshot-date").textContent = SNAPSHOT_DATE;
 
 const GIANTS = [
-  { brand: "OBI", domain: "obi.de", volume: 983000, cpc: 1, cat: "DIY" },
-  { brand: "Bauhaus", domain: "bauhaus.info", volume: 859000, cpc: 6, cat: "DIY" },
-  { brand: "Toom", domain: "toom.de", volume: 595000, cpc: 9, cat: "DIY" },
-  { brand: "Hornbach", domain: "hornbach.de", volume: 171000, cpc: 4, cat: "DIY" },
-  { brand: "Hagebau", domain: "hagebau.de", volume: 91000, cpc: 5, cat: "DIY" },
-  { brand: "Hellweg", domain: "hellweg.de", volume: 34000, cpc: 4, cat: "DIY" },
+  { brand: "OBI", domain: "obi.de", volume: 983000, cpc: 1 },
+  { brand: "Bauhaus", domain: "bauhaus.info", volume: 859000, cpc: 6 },
+  { brand: "Toom", domain: "toom.de", volume: 595000, cpc: 9 },
+  { brand: "Hornbach", domain: "hornbach.de", volume: 171000, cpc: 4 },
+  { brand: "Hagebau", domain: "hagebau.de", volume: 91000, cpc: 5 },
+  { brand: "Hellweg", domain: "hellweg.de", volume: 34000, cpc: 4 },
 ];
-const SPECIALTY = [
+
+const TIER1 = [
+  { brand: "Erfurt", domain: "erfurt.com", volume: 88000, cpc: 15, cat: "Tapety + malování" },
   { brand: "Boesner", domain: "boesner.com", volume: 33000, cpc: 9, cat: "Art supply" },
-  { brand: "Modulor", domain: "modulor.de", volume: 11000, cpc: 10, cat: "Art supply" },
+  { brand: "Storch", domain: "storch.de", volume: 13000, cpc: 15, cat: "Profi werkzeug" },
+  { brand: "Modulor", domain: "modulor.de", volume: 11000, cpc: 10, cat: "Designové potřeby" },
   { brand: "Brillux", domain: "brillux.de", volume: 7100, cpc: 10, cat: "Profi paint" },
   { brand: "Caparol", domain: "caparol.de", volume: 6300, cpc: 10, cat: "Profi paint" },
-  { brand: "Bauking", domain: "bauking.de", volume: 4500, cpc: 15, cat: "Building supply" },
-  { brand: "Raiffeisen Markt", domain: "raiffeisenmarkt.de", volume: 3800, cpc: 15, cat: "Rural / DIY" },
-  { brand: "Prema (vlastní)", domain: "i-prema.de", volume: 220, cpc: 245, cat: "Painter supply", own: true },
+  { brand: "Alpina Farben", domain: "alpina-farben.de", volume: 3500, cpc: 25, cat: "DIY paint" },
+  { brand: "Baufix", domain: "baufix.de", volume: 2200, cpc: 25, cat: "Stavební hmoty" },
+  { brand: "Pufas", domain: "pufas.de", volume: 1100, cpc: 20, cat: "Tapety + barvy" },
+];
+
+const TIER2 = [
   { brand: "Gerhardi", domain: "gerhardi-farben.de", volume: 600, cpc: 70, cat: "Profi paint" },
+  { brand: "KIP Klebeband", domain: "kip.de", volume: 400, cpc: 20, cat: "Krepové pásky" },
+  { brand: "Probau", domain: "probau.de", volume: 250, cpc: 35, cat: "Profi werkzeug" },
+  { brand: "Nespoli", domain: "nespoli.com", volume: 250, cpc: 6, cat: "Italian štětce" },
+  { brand: "Colorus", domain: "colorus.de", volume: 250, cpc: 60, cat: "Painter supply" },
+  { brand: "Prema (vlastní)", domain: "i-prema.de", volume: 220, cpc: 245, cat: "Painter supply", own: true },
+  { brand: "Malerwinkel", domain: "malerwinkel.de", volume: 200, cpc: 25, cat: "Painter supply" },
+  { brand: "Friess Maler", domain: "friess-malerwerkzeuge.de", volume: 90, cpc: 15, cat: "Profi werkzeug" },
+  { brand: "Wagner Sprayer", domain: "wagner-group.com", volume: 40, cpc: 15, cat: "Spray equipment" },
+  { brand: "Malerwerkstatt", domain: "malerwerkstatt.de", volume: 30, cpc: null, cat: "Painter supply" },
 ];
 
 function fmt(n) {
   return n.toLocaleString("cs-CZ");
 }
 
-function fillTable(elId, data) {
+function fillTable(elId, data, showCat = true) {
   const tbody = document.getElementById(elId);
   data.sort((a, b) => b.volume - a.volume);
   data.forEach((d, i) => {
-    const tag = d.own ? "own" : (d.cat === "DIY" ? "diy" : "specialty");
+    const tag = d.own ? "own" : "specialty";
     const tr = document.createElement("tr");
     if (d.own) tr.style.background = "#e3f2fd";
+    const cpc = d.cpc === null ? "—" : d.cpc;
+    let catCell = "";
+    if (showCat) catCell = `<td><span class="tag ${tag}">${d.cat || ""}</span></td>`;
     tr.innerHTML = `
       <td>${i + 1}</td>
       <td><b>${d.brand}</b></td>
       <td><a href="https://${d.domain}" target="_blank" rel="noopener" style="color: var(--brand);">${d.domain}</a></td>
       <td><b>${fmt(d.volume)}</b></td>
-      <td>${d.cpc}</td>
-      <td><span class="tag ${tag}">${d.cat}</span></td>
+      <td>${cpc}</td>
+      ${catCell}
     `;
     tbody.appendChild(tr);
   });
 }
 
-fillTable("giants_table", GIANTS);
-fillTable("specialty_table", SPECIALTY);
+fillTable("tier1_table", TIER1);
+fillTable("tier2_table", TIER2);
+fillTable("giants_table", GIANTS, false);
 
 const LAYOUT_BASE = {
   paper_bgcolor: "#fff", plot_bgcolor: "#f8f9fa",
@@ -190,32 +221,34 @@ const LAYOUT_BASE = {
   margin: { t: 10, r: 20, b: 80, l: 70 }
 };
 
-// Giants chart (log scale)
-Plotly.newPlot("giants_chart", [{
-  x: GIANTS.map(d => d.brand),
-  y: GIANTS.map(d => d.volume),
+// Tier 1 chart
+const tier1Sorted = [...TIER1].sort((a, b) => b.volume - a.volume);
+Plotly.newPlot("tier1_chart", [{
+  x: tier1Sorted.map(d => d.brand),
+  y: tier1Sorted.map(d => d.volume),
   type: "bar",
-  marker: { color: "#B71C1C" },
-  text: GIANTS.map(d => fmt(d.volume)),
+  marker: { color: "#2E7D32" },
+  text: tier1Sorted.map(d => fmt(d.volume)),
   textposition: "auto",
   hovertemplate: "%{x}<br>%{y:,} /měs<extra></extra>",
 }], { ...LAYOUT_BASE, yaxis: { title: "Search volume /měs" } }, { responsive: true });
 
-// Specialty chart
-Plotly.newPlot("specialty_chart", [{
-  x: SPECIALTY.map(d => d.brand),
-  y: SPECIALTY.map(d => d.volume),
+// Tier 2 chart (Prema highlighted)
+const tier2Sorted = [...TIER2].sort((a, b) => b.volume - a.volume);
+Plotly.newPlot("tier2_chart", [{
+  x: tier2Sorted.map(d => d.brand),
+  y: tier2Sorted.map(d => d.volume),
   type: "bar",
-  marker: { color: SPECIALTY.map(d => d.own ? "#1565C0" : "#2E7D32") },
-  text: SPECIALTY.map(d => fmt(d.volume)),
+  marker: { color: tier2Sorted.map(d => d.own ? "#1565C0" : "#FB8C00") },
+  text: tier2Sorted.map(d => fmt(d.volume)),
   textposition: "auto",
   hovertemplate: "%{x}<br>%{y:,} /měs<extra></extra>",
 }], { ...LAYOUT_BASE, yaxis: { title: "Search volume /měs" } }, { responsive: true });
 
-// SoS pie (specialty only)
-const sosLabels = SPECIALTY.map(d => d.brand);
-const sosValues = SPECIALTY.map(d => d.volume);
-const sosColors = SPECIALTY.map(d => d.own ? "#1565C0" : (d.cat === "Profi paint" ? "#FB8C00" : "#2E7D32"));
+// SoS pie (Tier 2 only — relevant peer group)
+const sosLabels = tier2Sorted.map(d => d.brand);
+const sosValues = tier2Sorted.map(d => d.volume);
+const sosColors = tier2Sorted.map(d => d.own ? "#1565C0" : "#FB8C00");
 Plotly.newPlot("sos_chart", [{
   labels: sosLabels, values: sosValues, type: "pie",
   marker: { colors: sosColors },
