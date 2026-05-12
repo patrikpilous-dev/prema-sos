@@ -141,11 +141,226 @@ footer { text-align: center; padding: 24px; color: var(--muted); font-size: 12px
   </table>
 </section>
 
+<section>
+  <h2>🥇 Top 20 organických klíčových slov i-prema.de</h2>
+  <table>
+    <thead><tr>
+      <th>#</th><th>Keyword</th><th data-numeric="true">Volume /měs</th>
+      <th data-numeric="true">Pozice</th><th data-numeric="true">Traffic</th>
+      <th data-numeric="true">CPC (EUR)</th><th>Cílová URL</th>
+    </tr></thead>
+    <tbody id="org_kw_table"></tbody>
+  </table>
+  <p class="muted" style="margin-top: 8px;">Sortable — klikni na hlavičku. Pozn.: "gefilzter putz" je #1 organicky pro 7900 vol/měs — top blog článek Premy. "tim tramnitz" (formula 4 jezdec) je nezáměrné, ale generuje 181 návštěv. "farbeimer" #5 pro 1300 vol = klíčový produkt.</p>
+</section>
+
+<section>
+  <h2>🏆 Top 15 stránek i-prema.de podle organického trafficu</h2>
+  <table>
+    <thead><tr>
+      <th>#</th><th>URL</th>
+      <th data-numeric="true">Traffic /měs</th>
+      <th data-numeric="true">Value (EUR)</th>
+      <th data-numeric="true">KW celkem</th>
+      <th>Top KW</th>
+      <th data-numeric="true">Top vol.</th>
+      <th data-numeric="true">Top poz.</th>
+    </tr></thead>
+    <tbody id="top_pages_table"></tbody>
+  </table>
+  <p class="muted" style="margin-top: 8px;">
+    <b>Hlavní zdroj trafficu = blog článek o filzputz/glattputz</b> (426 návštěv/měs, value 27 677 EUR). Strategie zřetelná: kvalitní informační obsah na nejasné DIY pojmy + linkbuilding na produkt.
+  </p>
+</section>
+
+<section>
+  <h2>🥊 Top 15 reálných organických konkurentů</h2>
+  <table>
+    <thead><tr>
+      <th>#</th><th>Konkurent</th>
+      <th data-numeric="true">Společných KW</th>
+      <th data-numeric="true">KW celkem</th>
+      <th data-numeric="true">DR</th>
+      <th data-numeric="true">Traffic /měs</th>
+    </tr></thead>
+    <tbody id="org_competitors_table"></tbody>
+  </table>
+  <p class="muted" style="margin-top: 8px;">
+    Vedle DIY giants (OBI, Hornbach, Bauhaus, Toom) má Prema reálné <b>niche organic konkurenty</b>: maler-discount24.de (42 společných KW, DR 7 — malý hráč, ale ranking), metylan.de (DR 36), malerbedarf24.de, 1a-malerwerkzeuge.com, farbklecks24shop.de, vietschi-farben.net. Tohle jsou skuteční SoS rivali pro výpočet share.
+  </p>
+</section>
+
+<section>
+  <h2>🔗 Top 15 zpětných odkazujících domén (DR)</h2>
+  <table>
+    <thead><tr>
+      <th>#</th><th>Doména</th>
+      <th data-numeric="true">DR</th>
+      <th data-numeric="true">Traffic domény</th>
+      <th data-numeric="true">Dofollow odkazů</th>
+      <th>První viděno</th>
+    </tr></thead>
+    <tbody id="refdomains_table"></tbody>
+  </table>
+  <p class="muted" style="margin-top: 8px;">
+    <b>Pozor — část backlink profilu vypadá toxicky.</b> Domény "itxoft-trusted-seo-solutions.site", "itxoft-results-focused-seo.site", "buybacklinks.agency" jsou klasický SEO spam (PBN, automated link farms). <b>Doporučení:</b> projít Ahrefs Disavow Tool a zvážit odmítnutí toxických linků v Google Search Console. Kvalitní reálné zdroje: trustedshops.de (DR 88, reviewy), otto.de (DR 81, partnerství), gelbeseiten.de (1307 dofollow odkazů — directory).
+  </p>
+</section>
+
 <footer>
   Data: Ahrefs DE (Keywords Explorer + Site Explorer) · Snapshot V1 — bez historie<br>
-  V2 přidá: 25-měsíční historii, kvartální update, organická konkurence per kategorii produktů
+  V2 přidá: 25-měsíční historii brand search, kvartální update, GSC integraci
 </footer>
 </div>
+
+<script src="sortable.js"></script>
+<script>
+const ORG_KW = [
+  {keyword: "gefilzter putz", volume: 7900, position: 1, traffic: 395, cpc: 70, url: "/blog/konkurrenz-fur-den-reibeputz--filzputz-und-glattputz/"},
+  {keyword: "tim tramnitz", volume: 7400, position: 10, traffic: 181, cpc: 14, url: "/tim-tramnitz/"},
+  {keyword: "wie lang ist ein tapeziertisch", volume: 300, position: 1, traffic: 91, cpc: 19, url: "/tapeziertische/"},
+  {keyword: "isolierfarbe", volume: 3000, position: 11, traffic: 63, cpc: 17, url: "/blog/die-arbeit-mit-isolierfarbe-tipps-tricks/"},
+  {keyword: "heftpflaster", volume: 3000, position: 7, traffic: 55, cpc: 25, url: "/heftpflaster-classic/"},
+  {keyword: "farbeimer", volume: 1300, position: 5, traffic: 48, cpc: 88, url: "/farbeimer-oval-ohne-deckel/"},
+  {keyword: "schwarzes toilettenpapier", volume: 450, position: 4, traffic: 47, cpc: 19, url: "/toilettenpapier-schwarz/"},
+  {keyword: "kleisterspritze", volume: 500, position: 5, traffic: 39, cpc: 14, url: "/kleisterspritze/"},
+  {keyword: "beer pong tisch", volume: 2000, position: 12, traffic: 35, cpc: 21, url: "/beer-pong-tisch/"},
+  {keyword: "fliesen überspachteln", volume: 2500, position: 14, traffic: 27, cpc: 25, url: "/blog/fliesen-uberspachteln/"},
+  {keyword: "multifunktionsspachtel", volume: 150, position: 2, traffic: 22, cpc: 18, url: "/multifunktionsspachtel/"},
+  {keyword: "muss man isolierfarbe überstreichen", volume: 50, position: 2, traffic: 20, cpc: null, url: "/blog/die-arbeit-mit-isolierfarbe-tipps-tricks/"},
+  {keyword: "schmetterling maler", volume: 50, position: 1, traffic: 20, cpc: null, url: "/flachenspachtel-holz/"},
+  {keyword: "osram halogen superstar", volume: 250, position: 4, traffic: 19, cpc: 16, url: "/halogen-ersatzlampe-superstar-r7s-osram/"},
+  {keyword: "abdeckpapier", volume: 400, position: 6, traffic: 19, cpc: 34, url: "/abdeckpapier-selbstklebend/"},
+  {keyword: "maurerhammer", volume: 1200, position: 9, traffic: 18, cpc: 17, url: "/maurerhammer/"},
+  {keyword: "tapetenkleister vlies", volume: 200, position: 4, traffic: 18, cpc: 13, url: "/fertig-tapetenkleister-fur-vlies/"},
+  {keyword: "malerbedarf", volume: 1800, position: 12, traffic: 18, cpc: 54, url: "/"},
+  {keyword: "schwämme kaufen", volume: 150, position: 2, traffic: 17, cpc: 17, url: "/schwamme/"},
+  {keyword: "tapeziermesser", volume: 350, position: 5, traffic: 15, cpc: 15, url: "/tapeziermesser-profi/"},
+];
+
+const TOP_PAGES = [
+  {url: "/blog/konkurrenz-fur-den-reibeputz--filzputz-und-glattputz/", traffic: 426, value: 27677, kw: 9, top_kw: "gefilzter putz", top_vol: 7900, top_pos: 7},
+  {url: "/tim-tramnitz/", traffic: 181, value: 2539, kw: 1, top_kw: "tim tramnitz", top_vol: 7400, top_pos: 10},
+  {url: "/tapeziertische/", traffic: 125, value: 2061, kw: 8, top_kw: "wie lang ist ein tapeziertisch", top_vol: 300, top_pos: 1},
+  {url: "/blog/die-arbeit-mit-isolierfarbe-tipps-tricks/", traffic: 112, value: 1217, kw: 13, top_kw: "isolierfarbe", top_vol: 3000, top_pos: 11},
+  {url: "/blog/tapete-auf-tapete-kleben-kann-das-funktionieren-/", traffic: 100, value: 1042, kw: 34, top_kw: "tapete auf tapete kleben", top_vol: 300, top_pos: 9},
+  {url: "/beer-pong-tisch/", traffic: 62, value: 1183, kw: 14, top_kw: "beer pong tisch", top_vol: 2000, top_pos: 12},
+  {url: "/blog/schwammtechnik-einfache-und-schnelle-auffrischung/", traffic: 61, value: 1272, kw: 14, top_kw: "schwammtechnik wischtechnik wand", top_vol: 250, top_pos: 7},
+  {url: "/heftpflaster-classic/", traffic: 55, value: 1367, kw: 1, top_kw: "heftpflaster", top_vol: 3000, top_pos: 7},
+  {url: "/blog/wie-tapeten-richtig-entsorgt-werden/", traffic: 52, value: 35, kw: 17, top_kw: "tapete entsorgen", top_vol: 1600, top_pos: 14},
+  {url: "/toilettenpapier-schwarz/", traffic: 51, value: 962, kw: 3, top_kw: "schwarzes toilettenpapier", top_vol: 450, top_pos: 4},
+  {url: "/farbeimer-oval-ohne-deckel/", traffic: 51, value: 4251, kw: 3, top_kw: "farbeimer", top_vol: 1300, top_pos: 5},
+  {url: "/kleisterspritze/", traffic: 43, value: 599, kw: 3, top_kw: "kleisterspritze", top_vol: 500, top_pos: 5},
+  {url: "/flachenspachtel-holz/", traffic: 35, value: 77, kw: 5, top_kw: "schmetterling maler", top_vol: 50, top_pos: 1},
+  {url: "/blog/fliesen-uberspachteln/", traffic: 34, value: 809, kw: 4, top_kw: "fliesen überspachteln", top_vol: 2500, top_pos: 14},
+  {url: "/blog/richtig-abkleben/", traffic: 32, value: 570, kw: 8, top_kw: "abkleben", top_vol: 350, top_pos: 4},
+];
+
+const ORG_COMP = [
+  {domain: "obi.de", common: 148, total: 258612, dr: 76, traffic: 6946926},
+  {domain: "hornbach.de", common: 136, total: 216834, dr: 75, traffic: 3120166},
+  {domain: "bauhaus.info", common: 78, total: 80172, dr: 74, traffic: 2807555},
+  {domain: "toom.de", common: 56, total: 60832, dr: 70, traffic: 2188418},
+  {domain: "maler-discount24.de", common: 42, total: 457, dr: 7, traffic: 5432},
+  {domain: "metylan.de", common: 36, total: 1217, dr: 36, traffic: 14612},
+  {domain: "wuerth.de", common: 30, total: 19192, dr: 78, traffic: 204840},
+  {domain: "malerbedarf24.de", common: 26, total: 170, dr: 22, traffic: 1294},
+  {domain: "1a-malerwerkzeuge.com", common: 26, total: 196, dr: 9, traffic: 1185},
+  {domain: "alfa-direkt.de", common: 26, total: 920, dr: 38, traffic: 10566},
+  {domain: "hal-big.de", common: 21, total: 175, dr: 6, traffic: 765},
+  {domain: "storch.de", common: 21, total: 273, dr: 59, traffic: 3074},
+  {domain: "vietschi-farben.net", common: 20, total: 2076, dr: 33, traffic: 7582},
+  {domain: "handwerker3000.de", common: 19, total: 762, dr: 19, traffic: 4186},
+  {domain: "farbklecks24shop.de", common: 19, total: 1446, dr: 18, traffic: 9735},
+];
+
+const REFDOMAINS = [
+  {domain: "blogspot.com", dr: 95, traffic: 24890782, links: 3, seen: "2020-10-27"},
+  {domain: "pages.dev", dr: 93, traffic: 62636696, links: 0, seen: "2024-09-24"},
+  {domain: "provenexpert.com", dr: 91, traffic: 151671, links: 1, seen: "2026-05-04"},
+  {domain: "myshoptet.com", dr: 91, traffic: 3442, links: 2, seen: "2019-06-24"},
+  {domain: "za.com", dr: 90, traffic: 5999992, links: 0, seen: "2024-07-06"},
+  {domain: "similarweb.com", dr: 89, traffic: 3361320, links: 1, seen: "2015-10-06"},
+  {domain: "trustedshops.de", dr: 88, traffic: 470581, links: 2, seen: "2025-01-18"},
+  {domain: "aol.co.uk", dr: 87, traffic: 345808, links: 2, seen: "2018-02-09"},
+  {domain: "jimdoweb.com", dr: 85, traffic: 221301, links: 19, seen: "2025-06-29"},
+  {domain: "itxoft.com (toxic)", dr: 84, traffic: 0, links: 0, seen: "2025-02-23"},
+  {domain: "ask.com", dr: 82, traffic: 111533, links: 0, seen: "2016-02-03"},
+  {domain: "otto.de", dr: 81, traffic: 11447921, links: 2, seen: "2026-03-27"},
+  {domain: "meinestadt.de", dr: 81, traffic: 1618945, links: 0, seen: "2019-08-25"},
+  {domain: "11880.com", dr: 80, traffic: 139432, links: 0, seen: "2018-03-14"},
+  {domain: "buybacklinks.agency (toxic)", dr: 79, traffic: 0, links: 0, seen: "2026-04-20"},
+];
+
+function fmtNum(n) { return n === null || n === undefined ? "—" : n.toLocaleString("cs-CZ"); }
+
+function fillOrgKw() {
+  const tbody = document.getElementById("org_kw_table");
+  ORG_KW.forEach((k, i) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${i+1}</td><td><b>${k.keyword}</b></td>` +
+      `<td>${fmtNum(k.volume)}</td>` +
+      `<td><b>${k.position}</b></td>` +
+      `<td>${fmtNum(k.traffic)}</td>` +
+      `<td>${k.cpc == null ? "—" : k.cpc}</td>` +
+      `<td><a href="https://www.i-prema.de${k.url}" target="_blank" rel="noopener" style="color: var(--brand); font-size: 11px;">${k.url}</a></td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function fillTopPages() {
+  const tbody = document.getElementById("top_pages_table");
+  TOP_PAGES.forEach((p, i) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${i+1}</td>` +
+      `<td><a href="https://www.i-prema.de${p.url}" target="_blank" rel="noopener" style="color: var(--brand); font-size: 11px;">${p.url}</a></td>` +
+      `<td><b>${fmtNum(p.traffic)}</b></td>` +
+      `<td>${fmtNum(p.value)}</td>` +
+      `<td>${p.kw}</td>` +
+      `<td>${p.top_kw}</td>` +
+      `<td>${fmtNum(p.top_vol)}</td>` +
+      `<td>${p.top_pos}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function fillOrgComp() {
+  const tbody = document.getElementById("org_competitors_table");
+  ORG_COMP.forEach((c, i) => {
+    const tr = document.createElement("tr");
+    const isGiant = c.dr >= 70;
+    tr.innerHTML = `<td>${i+1}</td>` +
+      `<td><b><a href="https://${c.domain}" target="_blank" rel="noopener" style="color: var(--brand);">${c.domain}</a></b>` +
+      (isGiant ? ` <span class="tag" style="background:#ffe0e0;color:#b71c1c;">DIY giant</span>` : "") + `</td>` +
+      `<td><b>${c.common}</b></td>` +
+      `<td>${fmtNum(c.total)}</td>` +
+      `<td>${c.dr}</td>` +
+      `<td>${fmtNum(c.traffic)}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function fillRefdomains() {
+  const tbody = document.getElementById("refdomains_table");
+  REFDOMAINS.forEach((r, i) => {
+    const tr = document.createElement("tr");
+    const toxic = r.domain.includes("toxic");
+    if (toxic) tr.style.background = "#ffebee";
+    tr.innerHTML = `<td>${i+1}</td>` +
+      `<td><b>${r.domain}</b></td>` +
+      `<td>${r.dr}</td>` +
+      `<td>${fmtNum(r.traffic)}</td>` +
+      `<td>${r.links}</td>` +
+      `<td>${r.seen}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+fillOrgKw();
+fillTopPages();
+fillOrgComp();
+fillRefdomains();
+</script>
 
 <script>
 const SNAPSHOT_DATE = new Date().toLocaleDateString("cs-CZ", { year: "numeric", month: "long", day: "numeric" });
